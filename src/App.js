@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useState, useEffect } from "react";
+import Albums from "./Components/Albums";
+import "./App.css";
+import { MyContext } from "./AlbumsContext";
+import AddAlbum from "./Components/AddAlbum";
 
-function App() {
+const App = () => {
+  const { setAlbums } = useContext(MyContext);
+  const [showForm, setShowForm] = useState(false);
+  // console.log(albums);
+
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/albums"
+        );
+        const data = await response.json();
+        setAlbums(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAlbums();
+  }, [setAlbums]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>My Album Collection</h1>
+      <button className="btn" onClick={() => setShowForm(true)}>
+        Add Album
+      </button>
+      {showForm && <AddAlbum hide={setShowForm} />}
+      <Albums />
     </div>
   );
-}
+};
 
 export default App;
