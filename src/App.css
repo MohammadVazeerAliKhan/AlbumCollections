@@ -105,16 +105,32 @@ label {
   background-color: green;
 }
 
+.updatebg {
+  background-color: inherit;
+  z-index: 10;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+}
+
 .fixed {
   z-index: 10;
   position: fixed;
   top: 30%;
   left: 30%;
   /* transform: translate(-50%); */
-  height: 40vh;
-  width: 40vw;
-
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  min-height: 40vh;
+  min-width: 40vw;
+  background-image: linear-gradient(
+    to top,
+    #a8edea 0%,
+    #fed6e3 100%
+  ) !important;
 }
 
 @media only screen and (max-width: 1000px) {
